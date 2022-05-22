@@ -1,13 +1,20 @@
 header{
+    top: 0;
+    z-index: 1;
+    position: fixed;
     width: 100%;
-    min-height: 25px;
+    min-height: 55px;
     background: #c19921;
     display: flex;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    margin-bottom: 10px;
+    left: 50px;
 }
-
+.logo .fa-book-reader{
+    color: black;
+}
 header a{
     color: black;
     text-transform: uppercase;
@@ -41,6 +48,7 @@ header ul li img{
     overflow: hidden;
 }
 .drop-nav .dropdown{
+    z-index: 100;
     position: absolute;
     background: #c19921;
     width: 100%;

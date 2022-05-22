@@ -40,7 +40,7 @@ function Register(){
             return setUser({...user, err: "Password did not match.", success: ''})
            
         try {
-            const res = await axios.post('/user/register', {
+            const res = await axios.post('/api/register', {
                 name, email, password
             })
 

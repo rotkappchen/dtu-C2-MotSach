@@ -1,9 +1,11 @@
 import React, {useEffect} from 'react';
 import {BrowserRouter as Router} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
+import {DataProvider} from './GlobalState'
 
 import Header from './components/header/Header'
 import Body from './components/body/Body'
+import Footer from './components/footer/Footer';
 import axios from 'axios';
 import {dispatchLogin, dispatchGetUser, fetchUser} from './redux/actions/authAction'
 //import './App.css';
@@ -17,7 +19,7 @@ useEffect(() => {
   const firstLogin = localStorage.getItem('firstLogin')
   if(firstLogin){
     const getToken = async () => {
-      const res = await axios.post('/user/refresh_token', null)
+      const res = await axios.post('api/refresh_token', null)
       dispatch({type: 'GET_TOKEN', payload: res.data.access_token})
     }
     getToken()
@@ -38,12 +40,15 @@ useEffect(() => {
 },[token, dispatch])
 
   return (
+    <DataProvider>
     <Router>
     <div className="App">
-      <Header/>
-      <Body />
+      <Header />
+      <Body  />
+      <Footer />
     </div>
     </Router>
+    </DataProvider>
   );
 }
 

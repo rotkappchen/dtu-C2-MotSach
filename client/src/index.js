@@ -3,14 +3,20 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import DataProvider from './redux/store';
+import DataProvider0 from './redux/store';
+import SettingsContextProvider from './components/body/pomodoro/SettingsContext';
+import { DataProvider } from './GlobalState';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
   
     <DataProvider>
+      <DataProvider0>
+      <SettingsContextProvider>
       <App />
+      </SettingsContextProvider>
+      </DataProvider0>
     </DataProvider>
 
     

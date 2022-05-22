@@ -4,6 +4,7 @@ const jwt= require ('jsonwebtoken')
 //const sendMail = require('./sendMail')
 const {CLIENT_URL}= process.env
 const fetch = require('node-fetch')
+const user = require('../models/user')
 
 
 const userCtrl ={
@@ -80,7 +81,7 @@ const userCtrl ={
             const refresh_token= createRefreshToken({id: user._id})
             res.cookie('refreshtoken', refresh_token,{
                 httpOnly: true, 
-                path: '/user/refresh_token',
+                path: '/api/refresh_token',
                 maxAge: 7*24*60*60*1000 // 7 days
             })
             
@@ -93,6 +94,7 @@ const userCtrl ={
     getAccessToken: (req, res) => {
         try {
             const rf_token = req.cookies.refreshtoken
+            //console.log(rf_token)
             if (!rf_token) return res.status(400).json({msg: "Please login now!"})
 
             jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) =>{
@@ -154,7 +156,7 @@ const userCtrl ={
     },
     logout: async (req, res) => {
         try {
-            res.clearCookie('refreshtoken', {path: '/user/refresh_token'})
+            res.clearCookie('refreshtoken', {path: '/api/refresh_token'})
             return res.json({msg: "Logged out."})
             
         } catch (err) {
@@ -171,7 +173,7 @@ const userCtrl ={
 
             res.json({msg: "Update Success!"})
             
-        } catch (error) {
+        } catch (err) {
             return res.status(500).json({msg: err.message})
         }
     },
@@ -219,7 +221,7 @@ const userCtrl ={
                 const refresh_token = createRefreshToken({id: user._id})
                 res.cookie('refreshtoken', refresh_token, {
                     httpOnly: true,
-                    path: '/user/refresh_token',
+                    path: '/api/refresh_token',
                     maxAge: 7*24*60*60*1000 // 7 days
                 })
 
@@ -234,7 +236,7 @@ const userCtrl ={
                 const refresh_token = createRefreshToken({id: newUser._id})
                 res.cookie('refreshtoken', refresh_token, {
                     httpOnly: true,
-                    path: '/user/refresh_token',
+                    path: '/api/refresh_token',
                     maxAge: 7*24*60*60*1000 // 7 days
                 })
 
@@ -242,6 +244,49 @@ const userCtrl ={
             }
 
 
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    addBookList: async (req, res) => {
+        try {
+            const {favBook} = req.body
+            // var added = false
+            // added= Users.find({_id: req.user.id}, {
+            //     $elemMatch: {favBook: favBook}
+            // })
+            // if (added) return res.status(400).json({msg:"This book is already added."})
+            // else
+            await Users.findOneAndUpdate({_id: req.user.id}, {
+                $push: {favBook: favBook}
+            })
+
+            res.json({msg: "Book added"})
+            
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    removeBookList: async (req, res) => {
+        try {
+            const {favBook} = req.body
+            await Users.findOneAndUpdate({_id: req.user.id}, {
+                $pull: {favBook: favBook}
+            })
+            
+        } catch (err) {
+            return res.status(500).json({msg: err.message})
+        }
+    },
+    updateUserLevel: async (req, res) => {
+        try {
+            const {exp, level} = req.body
+
+            await Users.findOneAndUpdate({_id: req.params.id}, {
+                exp, level
+            })
+
+            res.json({msg: "Update Success!"})
         } catch (err) {
             return res.status(500).json({msg: err.message})
         }

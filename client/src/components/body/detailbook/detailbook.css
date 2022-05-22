@@ -1,0 +1,88 @@
+.detail{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 50px;
+    font-size: 150%;
+}
+.detail img{
+    max-width: 400px;
+    width: 100%;
+    margin: 20px;
+    height: 450px;
+    object-fit: cover;
+    display: block;
+}
+.box-detail{
+    max-width: 500px;
+    width: 100%;
+    margin: 5px 20px;
+}
+.box-detail .row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.book_detail{
+    font-size: smaller;
+}
+.box-detail h2{
+    text-transform: uppercase;
+    color: #c19921;
+    letter-spacing: 2px;
+    font-weight: 2rem;
+}
+.box-detail p{
+    line-height: 1.5;
+    margin: 10px 0;
+    opacity: 0.8;
+}
+.box-detail .cart{
+    margin-right: 10px;
+    background: #333;
+    color: white;
+    margin-top: 10px;
+    padding: 10px 25px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 7px
+}
+
+.box-detail .seller_url{
+    background: #c19921;
+    color: white;
+    margin-top: 10px;
+    padding: 10px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-radius: 7px
+}
+
+/* ------------ reviews ------------- */
+.comments h2{
+    text-align: left;
+}
+.reviews{
+    width: 115px;
+    margin: 10px 0;
+}
+.reviews input{
+    display: none;
+}
+.reviews label{
+    color: #999;
+    margin: 5px 0;
+    padding-right: 5px;
+    cursor: pointer;
+    float: right;
+}
+.reviews input:not(:checked) ~ label:hover,
+.reviews input:not(:checked) ~ label:hover ~ label{
+    color: crimson;
+}
+.reviews input:checked ~ label{
+    color: crimson;
+}

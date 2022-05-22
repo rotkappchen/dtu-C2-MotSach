@@ -4,14 +4,16 @@ import {useSelector} from 'react-redux'
 import axios from 'axios'
 
 function Header(){
+
     const auth = useSelector(state=>state.auth)
 
-    const {user, isLogged}=auth
+    const {user, isLogged, isAdmin, isEditor}=auth
 
     const handleLogout = async () => {
         try {
-            await axios.get('/user/logout')
+            await axios.get('/api/logout')
             localStorage.removeItem('firstLogin')
+            //localStorage.removeItem('list')
             window.location.href = "/";
         } catch (err) {
             window.location.href = "/";
@@ -39,13 +41,38 @@ function Header(){
     return(
         <header>
         <div className="logo">
-            <h1><Link to="/">Mọt Sách</Link></h1>
+            <h1><Link to="/"><i class="fas fa-book-reader"></i> Mọt Sách</Link></h1>
         </div>
 
         <ul stryle={transForm}>
-            <li><Link to="/"><i className=""></i> Homepage</Link></li>
-            <li><Link to="/introduction"><i className=""></i> Introduction</Link></li>
-            <li><Link to="/FAQ"><i className=""></i> FAQ</Link></li>
+            <li><Link to="/"><i className=""></i>Books</Link></li>
+            <li><Link to="/blogs"><i className=""></i>Blogs</Link></li>
+            
+            {
+                isAdmin || isEditor
+                ? <li><Link to="/genres"><i className=""></i>Genres</Link></li>
+                : <li><Link to="/about"><i className=""></i> About</Link></li>
+            }
+            {
+                isAdmin || isEditor
+                ? <li><Link to="/add_book"><i className=""></i>Add Book</Link></li>
+                : <></>
+            }{
+                !isAdmin
+                ?<li><Link to="/write"><i className=""></i>Write</Link></li>
+                :<></>
+            }
+            {
+                !isAdmin
+                ?<>{
+                    isLogged ?
+                    <li> <Link to="/subscription"><i className=""></i>Donate</Link></li>
+                    :
+                    <li> <Link to="/login"><i className=""></i>Donate</Link></li>
+
+                } </>
+                :<li> <Link to="/history"><i className=""></i>Donators</Link></li>
+            }
             {
                 isLogged
                 ? userLink()

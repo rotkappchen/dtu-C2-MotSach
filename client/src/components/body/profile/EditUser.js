@@ -14,6 +14,7 @@ function EditUser() {
     const token = useSelector(state => state.token)
 
     const [checkAdmin, setCheckAdmin] = useState(false)
+    const [checkEditor, setCheckEditor] = useState(false)
     const [err, setErr] = useState(false)
     const [success, setSuccess] = useState(false)
     const [num, setNum] = useState(0)
@@ -24,6 +25,7 @@ function EditUser() {
                 if(user._id === id){
                     setEditUser(user)
                     setCheckAdmin(user.role === 1 ? true : false)
+                    setCheckEditor(user.role === 2 ? true : false)
                 }
             })
         }else{
@@ -34,8 +36,8 @@ function EditUser() {
     const handleUpdate = async () => {
         try {
             if(num % 2 !== 0){
-                const res = await axios.patch(`/user/update_role/${editUser._id}`, {
-                    role: checkAdmin ? 1 : 0
+                const res = await axios.patch(`/api/update_role/${editUser._id}`, {
+                    role: checkAdmin ? 1 : checkEditor ? 2 : 0
                 }, {
                     headers: {Authorization: token}
                 })
@@ -48,10 +50,19 @@ function EditUser() {
         }
     }
 
-    const handleCheck = () => {
+    const handleCheckAdmin = () => {
         setSuccess('')
         setErr('')
         setCheckAdmin(!checkAdmin)
+        setCheckEditor(false)
+        setNum(num + 1)
+    }
+
+    const handleCheckEditor = () => {
+        setSuccess('')
+        setErr('')
+        setCheckAdmin(false)
+        setCheckEditor(!checkEditor)
         setNum(num + 1)
     }
 
@@ -78,9 +89,14 @@ function EditUser() {
 
                 <div className="form-group">
                     <input type="checkbox" id="isAdmin" checked={checkAdmin}
-                    onChange={handleCheck} />
+                    onChange={handleCheckAdmin} />
                     <label htmlFor="isAdmin">isAdmin</label>
+                    <span>                   </span>
+                    <input type="checkbox" id="isAdmin" checked={checkEditor}
+                    onChange={handleCheckEditor} />
+                    <label htmlFor="isAdmin">isEditor</label>
                 </div>
+                
 
                 <button onClick={handleUpdate}>Update</button>
 
