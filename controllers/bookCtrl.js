@@ -67,14 +67,14 @@ const bookCtrl = {
     },
     createBook: async (req, res)=>{
         try {
-            const {book_id, title, description, summary, author, genre, language, images, page}= req.body;
+            const {book_id, title, description, summary, author, genre, language, images, page, sellerUrl}= req.body;
 
             const book = await Books.findOne({book_id})
             if (book)
             return res.status(400).json({msg:"This book already exists."})
 
             const newBook= new Books({
-                book_id, title: title.toLowerCase() , description, summary, author, genre, language, images, page
+                book_id, title: title.toLowerCase() , description, summary, author, genre, language, images, page, sellerUrl
             })
             
             await newBook.save()

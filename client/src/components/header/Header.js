@@ -51,7 +51,7 @@ function Header(){
             {
                 isAdmin || isEditor
                 ? <li><Link to="/genres"><i className=""></i>Genres</Link></li>
-                : <li><Link to="/about"><i className=""></i> About</Link></li>
+                : <li><Link to="/about"><i className=""></i>Pomodoro</Link></li>
             }
             {
                 isAdmin || isEditor
@@ -71,7 +71,7 @@ function Header(){
                     <li> <Link to="/login"><i className=""></i>Donate</Link></li>
 
                 } </>
-                :<li> <Link to="/history"><i className=""></i>Donators</Link></li>
+                :<li> <Link to="/history"><i className=""></i>Donors</Link></li>
             }
             {
                 isLogged

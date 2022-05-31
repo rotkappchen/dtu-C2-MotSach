@@ -127,6 +127,7 @@ function CreateProduct() {
                 })
             }
             setCallback(!callback)
+            alert("Bood added to database!")
             navigate.push("/")
         } catch (err) {
             alert(err.response.data.msg)

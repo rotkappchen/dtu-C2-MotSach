@@ -43,7 +43,7 @@ function History() {
 
     return (
         <div className="history-page">
-            <h2>DONATORS</h2>
+            <h2>DONORS</h2>
             <table>
                 <thead>
                     <tr>

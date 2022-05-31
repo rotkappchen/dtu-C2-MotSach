@@ -4,6 +4,7 @@ import {GlobalState} from '../../../GlobalState'
 import Loading from '../../utils/loading/Loading'
 import {useNavigate, useParams} from 'react-router-dom'
 import {useSelector} from 'react-redux'
+import congratulation from '../../utils/sounds/congratulation.wav'
 
 
 function Write(){
@@ -62,7 +63,10 @@ function Write(){
         }
     }, [param.id, blogs])
 
-
+    function playSound(url) {
+        const audio = new Audio(url);
+        audio.play();
+      }
 
     const handleUpload = async e =>{
         e.preventDefault()
@@ -111,6 +115,8 @@ function Write(){
                 })
             }
             setCallback(!callback)
+            playSound(congratulation)
+            alert("Congratulation! You publish a blog! Our editor will check it first before making it public. You can check for your blog from your profile.")
             navigate.push("/")
         } catch (err) {
             alert(err.response.data.msg)

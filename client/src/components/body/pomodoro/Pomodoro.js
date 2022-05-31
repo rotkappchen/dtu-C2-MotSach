@@ -7,6 +7,7 @@ import {useSelector} from 'react-redux'
 import axios from'axios'
 import {useNavigate} from 'react-router-dom'
 import alertSound from './alert.mp3'
+import congratulation from '../../utils/sounds/congratulation.wav'
 
 
 var countWork =0
@@ -66,6 +67,7 @@ function Pomodoro(){
 
     const handleSubmit = async()=> {
         try {
+            const initialLvl = user.level
             const newExp = user.exp+parseInt(countWork*workValue*10)
             var test =Math.round(4*(user.level*user.level*user.level)/5)
             var newLvl = user.level
@@ -87,7 +89,7 @@ function Pomodoro(){
             // console.log(newExp)
             // console.log(newLvl)
 
-        
+        newLvl > initialLvl ? playSound(congratulation) : playSound(alertSound)
         alert("Congratulation! Your level is "+newLvl+" and your exp. is "+newExp)  
         stopTimer()
         

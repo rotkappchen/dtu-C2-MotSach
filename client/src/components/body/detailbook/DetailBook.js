@@ -128,6 +128,7 @@ function DetailBook(){
     const detailGenreText = detailGenre.join(", ")
     const handleAdd = () => {
                 dispatch(addToList(detailBook))
+                alert("Book added to favorite list!")
             
     }
 

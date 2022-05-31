@@ -17,6 +17,7 @@ function BtnRender({book, deleteBook, favBookList}) {
 
     const handleAdd = () => {
                 dispatch(addToList(book))
+                alert("Book added to favorite list!")
             
     }
     return (

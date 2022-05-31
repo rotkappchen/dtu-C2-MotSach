@@ -27,7 +27,7 @@ import {useSelector} from 'react-redux'
     
 function Body(){
     const auth = useSelector(state => state.auth)
-    const {isLogged, isAdmin}=auth
+    const {isLogged, isAdmin, isEditor}=auth
     return(
         <>
         <div className="promote_banner0">
@@ -55,8 +55,8 @@ function Body(){
                 <Route path="/detail/:id" element={<DetailBook />} />  
                 {/* <Route path="/bookslist" element={isLogged? <BooksList /> : <NotFound />} /> */}
                 <Route path="/genres" element={isAdmin? <Genres /> : <NotFound />} />
-                <Route path="/add_book" element={isAdmin? <AddBook /> : <NotFound />} />
-                <Route path="/edit_book/:id" element={isAdmin? <AddBook /> : <NotFound />} />
+                <Route path="/add_book" element={<AddBook />} />
+                <Route path="/edit_book/:id" element={<AddBook />} />
                 <Route path="/history" element={isAdmin? <History /> : <NotFound />} />
                 <Route path="/pomodoro" element={isLogged? <Pomodoro /> : <Login />} /> 
                 <Route path="/read_book/:id" element={isLogged? <ReadBook /> : <Login />} /> 

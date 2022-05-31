@@ -52,14 +52,17 @@ const SetPomodoro = () => {
                     <div>
                     <span>WORK </span>
                     <input className="input0" type="number" name="work" onChange={handleChange} value={newTimer.work} />
+                    <span> minutes</span>
                     </div>
                     <div>
                     <span>SHORT </span>
                     <input className="input0" type="number" name="shortBreak" onChange={handleChange} value={newTimer.short} />
+                    <span> minutes</span>
                     </div>
                     <div>
                     <span>LONG </span>
                     <input className="input0" type="number" name="longBreak" onChange={handleChange} value={newTimer.long} />
+                    <span> minutes</span>
                     </div>
                 </div>
                 <button type='submit'>Set Timer</button>

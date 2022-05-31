@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 function About(){
     return (
@@ -22,6 +23,9 @@ The technique has been widely popularized by apps and websites providing timers 
                     <p>5. If you have finished fewer than three pomodoros, go back to Step 2 and repeat until you go through all three pomodoros.</p>
                     <p>6. After three pomodoros are done, take the fourth pomodoro and then take a long break (typically 20 to 30 minutes). Once the long break is finished, return to step 2.</p>
         </div>
+        <Link to="/pomodoro" className="seller_url">
+                        Start reading
+                        </Link>
         </div>
         </div>
     )

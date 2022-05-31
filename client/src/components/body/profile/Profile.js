@@ -10,6 +10,7 @@ import { GlobalState } from '../../../GlobalState'
 import { deleteFromList } from '../../../redux/actions/listActions'
 import FilterBlog from '../blogs/FilterBlog'
 import Filter from '../books/Filters'
+import LoadMore from '../books/LoadMore'
 
 
 const initialState = {
@@ -372,6 +373,7 @@ function Profile() {
                             }
                         </tbody>
                     </table>
+                    <LoadMore/>
                     <Link to={`/add_book`}>
                         <i class="fa fa-plus" style={{background: "#555", color: "white", padding: "15px"}}></i>
                     </Link>                    </div>
@@ -434,7 +436,7 @@ function Profile() {
                             {
                                 books.map(book => (
                                     <tr key={book._id}>
-                                        <td>{book.title}</td>
+                                    <td><Link to={`/detail/${book._id}`}>{book.title}</Link></td>
                                         <td>{book.author}</td>
                                         <td>{book.createdAt}</td>
                                         <td>
@@ -452,6 +454,7 @@ function Profile() {
                             }
                         </tbody>
                     </table>
+                    <LoadMore/>
                     <Link to={`/add_book`}>
                         <i class="fa fa-plus" style={{background: "#555", color: "white", padding: "15px"}}></i>
                     </Link>
